@@ -1,0 +1,10 @@
+/resources/js
+/resources/main.js
+/node_modules
+/target
+package-lock.json
+.vscode
+*.log
+package-lock.json
+**/js
+

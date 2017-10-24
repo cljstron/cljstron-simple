@@ -1,0 +1,18 @@
+;; shadow-cljs configuration
+{  
+  :source-paths ["src"]
+
+  :dependencies  []
+
+  :builds
+  { :renderer
+    { :target :browser
+      :output-dir "resources/js"
+      :asset-path "js"
+
+      :modules 
+      { :simple {:output-to "js/main.js" :entries [cljstron-simple.renderer.main]}}      
+      
+      :devtools 
+      { :before-load cljstron-simple.renderer.main/stop
+        :after-load cljstron-simple.renderer.main/start}}}}
