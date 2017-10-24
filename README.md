@@ -7,14 +7,13 @@ A library to manage and develop `electron` applications in `ClojureScript`... an
 
 It is only as for now a simple experimental `electron` app used as a sandbox.
 ### Version
-  * [`@ivanpierre/app@1.0.13`](https://www.npmjs.com/package/@ivanpierre/app) first beta version will be moved to `cljstron` on NPM as `cljstron@0.0.1-beta1`.
-  * GitHub repository: https://github.com/cljstron/cljs-node-electron-boot. First beta version will be moved to `cljstron/CLJStron` repository with release `0.0.1-beta1`.
+  * [`@ivanpierre/cljstron-simple@1.0.3`](https://www.npmjs.com/package/@ivanpierre/cljstron-simple)
+  * GitHub repository: https://github.com/cljstron/cljstron-simple.
 ## Dependencies (as for now)
 ### NPM 
   * [`electron@1.8.1`](https://github.com/electron/electron) It's necessary to compile the project. Why? because of the compiler... :unamused:.
   * [`shadow-cljs@2.0.34`](https://github.com/thheller/shadow-cljs) The compiler for now, but this will be in a module afterward (compiler agnostic). Root compilation will be a raw `lein` project.
 ### Clojars
-  * [`[camel-snake-kebab "0.4.0"]`](https://github.com/qerub/camel-snake-kebab) It's used to manage `snake-case`d and `camelCase`d keys. I will change to the `camel-case` library included in `electron` package, or not... :wink:
 ## Installation
 As it's an alpha release, I suppose you already know how to install programs and the configuration of your computer... :yum:
 
@@ -32,15 +31,19 @@ As it's an alpha release, I suppose you already know how to install programs and
     * `shadow-cljs` : `npm i -g "shadow-cljs"`
     * `electron` : `npm i -g "electron@1.8.1"`
 ### Installing project
-Go in a developpement directory or create it.
+Go in a `CLJStron` devvelopement directory or create it.
 
-create and download the project directory :
+Go to the Plugs directory :
 
-`git clone https://github.com/cljstron/cljs-node-electron-boot.git`
+`ce plugs`
 
-You should be in the project directory :
+create and download the plug directory :
 
-`cd cljs-node-electron-boot`
+`git clone https://github.com/cljstron/cljstron-simple.git`
+
+You should be in the plug directory :
+
+`cd cljstron-simple`
 
 And download the needed libraries :
 
@@ -53,17 +56,14 @@ Compile the `main`and `renderer` applications in development mode:
 
 If you've got errors... you're at work... :grin: Go to the [`Editing the project`](#editing-the-project) part. And try to figure out why, by reading the error messages.
 
+You should now require the plug from your main application or through the `app.edn` and `plug.edn` config files.
+
 _I'll try to only push working versions, but I'm on a `mac` now, so `Windows` and `Linux` releases have not been tested_.
 
 You can also put an issue on the [`project's GitHub repository issues page`](https://github.com/cljstron/cljs-node-electron-boot/issues).
 ### Lanching the project
-It's just :
+The Plugs can only be used in conjonction with [`CLJStron`](https://github.com/cljstron/cljstron).
 
-`electron .` or `npm start`
-
-Normally you have an open window with infos on the versions of your `electron` environment.
-
-For `mac` users, closing the windows doesn't stop the program, you have to go to the menu and close the application. Bad `mac` habit, but you can change it, see editing code.
 ### Editing the project
 You can use whatever editor that support `Clojure` and `ClojureScript`
   * EMACS
@@ -87,6 +87,7 @@ or even with no support. I use [`Visual Sudio Code`](https://github.com/cljstron
     │   └── Home.md                    Junk file
     ├── LICENSE                        Licence file
     │
+    ├── app.edn                        Main Plug desctiptor
     ├── cljs.edn                       Futur project file for cljsjs "Lumo"
     ├── clojure.clj                    Futur project file for leiningen
     ├── project.boot                   Futur project file for boot
@@ -102,20 +103,13 @@ or even with no support. I use [`Visual Sudio Code`](https://github.com/cljstron
     │   ├== [js]                       Compiled AOT, cache an executables for renderer
     │   │   ├++ [cljs-runtime]         Library and runtime for renderer
     │   │   ├++ manifest.json          Manifest of libraries and runtime
-    │   │   └== simple.js              The compiled main program for the renderer
+    │   │   └== main.js                The compiled renderer for the plug
     │   │
-    │   ├── app.edn                    Application descriptor
-    │   ├── index.html                 Empty page to create content from javascript
-    │   └== main.js                    The compiled main program of the application
+    │   ├── plug.edn                   Plugin access descriptor
+    │   ├── index.html                 some page to create content from javascript
+    │   └== main.js                    The compiled main of the plug
     │
     └── [src]                          Sources root
-        │
-        ├── [cljstron]                 Root of cljstron library
-        │   ├── [main]                 Root for helper function for main application
-        │   │   ├── interop.cljs       A file to translate recursively JS->CLJS structures (unused)
-        │   │   └── window.cljs        Helper for windows management, containers of renderers
-        │   ├── [common]               Root for helper function for both applications
-        │   └── [renderer]             Root for helper function for renderer application
         │
         ├── [cljstron_simple]          Sources for plug
         │   ├── [main]                 Main plug sources
@@ -124,6 +118,7 @@ or even with no support. I use [`Visual Sudio Code`](https://github.com/cljstron
         │   └── [renderer]             Renderer plug sources
         │       └── simple.cljs        Source for renderer.
         │
-        └── main.cljs                  Main entry point. Activate cljstron_simple 
+        └──[main]                      Main entry point. Activate cljstron_simple 
+            └── main.cljs              Source for main. Communicate with CLJStron + main app
 
 A last thing... the doc for `electron` is [`here`](https://electron.atom.io/docs/). It may help... :innocent:
