@@ -6,7 +6,11 @@
     "author": "Ivan Pierre, (2017)kilroySoft",
     "license": "MIT",
     "keywords": [
-        "electron", "clojurescript", "node.js", "nodejs", "plug"
+        "electron",
+        "clojurescript",
+        "node.js",
+        "nodejs",
+        "plug"
     ],
     "homepage": "https://github.com/cljstron/cljs-node-electron-boot/blob/master/README.md",
     "repository": {
@@ -15,7 +19,6 @@
     },
     "dependencies": {},
     "devDependencies": {
-        "electron": "^1.8.1",
-        "shadow-cljs": "^2.0.34"
+        "shadow-cljs": "^2.0.41"
     }
 }
